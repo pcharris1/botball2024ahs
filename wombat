@@ -1,0 +1,83 @@
+// get to line and flick switch, task 1 and then stuff
+
+void initialize(int f){
+	// f is true false thingy
+
+	/* on */
+	if (f == 1){
+	enable_servos();
+	enable_motors();
+	}
+
+	/* off */
+	if (f == 0){
+	disable_servos();
+	disable_motors();
+}
+}
+
+
+void motors(int l, int r){
+	// l is left, r is right
+	motor(1, l);
+	motor(2, r);
+}
+
+
+def main(){
+
+	// make sure it doesn’t start b4 light
+	initialize(0);
+	// ___________________________________
+
+	/* wait for light */
+	// light sensor is 2
+	if (analog(2) >= 500){
+	initialize(1);
+}
+// ___________________________________
+// raised arm to balance the bot while running
+
+	set_servo_position(1, 0);
+	// ___________________________________
+
+	/* pass first line */
+	motors(100,100);
+	msleep(1500);
+	// ___________________________________
+
+	/* continue to black line of switch area and orient on line*/
+	// tophat sensor is 0
+
+	while (analog(0) >= 1850){
+	motors(100, 100);
+}
+
+motors(10, 100);
+msleep(680);
+// ___________________________________
+
+	/* back up until right distance away to flick switch */
+// dist sens is 1
+
+	while (analog(1) >= 2700){
+	// staying on line
+	if (analog(2)<=1850){
+	motors(-30, -70)
+}
+else{
+motors(-70, -30)
+}
+
+}
+	// ___________________________________
+	
+	/* flick switch :) */
+	// arm got 2 servos for moving
+	set_servo_position(2, 675);
+	set_servo_position(1, 900);
+	set_servo_position(2, 1350);
+
+	// END (W.I.P.)
+	ao();
+}
